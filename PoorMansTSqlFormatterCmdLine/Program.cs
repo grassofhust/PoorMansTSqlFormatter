@@ -1,6 +1,6 @@
 ﻿/*
-Poor Man's T-SQL Formatter - a small free Transact-SQL formatting 
-library for .Net 2.0, written in C#. 
+Poor Man's T-SQL Formatter - a small free Transact-SQL formatting
+library for .Net 2.0, written in C#.
 Copyright (C) 2011-2013 Tao Klerks
 
 Additional Contributors:
@@ -59,7 +59,7 @@ namespace PoorMansTSqlFormatterCmdLine
                     UppercaseKeywords = true,
 					ExpandInLists = true
                 };
-            
+
             //bulk formatter options
             bool allowParsingErrors = false;
             List<string> extensions = new List<string>();
@@ -124,6 +124,7 @@ namespace PoorMansTSqlFormatterCmdLine
             }
             else
             {
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(UILANGUAGE_EN);
                 _generalResourceManager = new FrameworkClassReplacements.SingleAssemblyResourceManager("GeneralLanguageContent", Assembly.GetExecutingAssembly(), typeof(Program));
             }
 
@@ -249,7 +250,7 @@ namespace PoorMansTSqlFormatterCmdLine
                 string replaceToFolderPath = null;
                 if (!string.IsNullOrEmpty(outputFileOrFolder))
                 {
-                    //ignore the backups setting - wouldn't make sense to back up the source files if we're 
+                    //ignore the backups setting - wouldn't make sense to back up the source files if we're
                     // writing to another file anyway...
                     backups = false;
 
@@ -264,7 +265,7 @@ namespace PoorMansTSqlFormatterCmdLine
                     {
                         try
                         {
-                            //let's not worry too hard about releasing this resource - this is a command-line program, 
+                            //let's not worry too hard about releasing this resource - this is a command-line program,
                             // when it ends or dies all will be released anyway.
                             singleFileWriter = new StreamWriter(outputFileOrFolder);
                         }
@@ -367,7 +368,7 @@ namespace PoorMansTSqlFormatterCmdLine
             }
             if (!parsingError
                 && (
-                        (newFileContents.Length > 0 
+                        (newFileContents.Length > 0
                         && !oldFileContents.Equals(newFileContents)
                         )
                         || singleFileWriter != null

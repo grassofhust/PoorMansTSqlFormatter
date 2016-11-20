@@ -1,21 +1,7 @@
-REM Merge third-party and satellite (translation) assemblies into a single new executable assembly for easier distribution
+#!/usr/bin/env sh
 
-IF EXIST %1SqlFormatter.exe DEL %1SqlFormatter.exe
+pushd $1
+mono "..\..\..\ExternalBuildTools\ILRepack\ILRepack.exe" /t:exe /out:SqlFormatterTemp.exe SqlFormatterExeAssembly.exe PoorMansTSqlFormatterLib.dll NDesk.Options.dll LinqBridge.dll "es/SqlFormatterExeAssembly.resources.dll"
 
-"..\..\..\ExternalBuildTools\ILRepack\ILRepack.exe" /t:exe /out:%1SqlFormatterTemp.exe %1SqlFormatterExeAssembly.exe %1PoorMansTSqlFormatterLib.dll %1NDesk.Options.dll %1LinqBridge.dll %1es\SqlFormatterExeAssembly.resources.dll
-IF %ERRORLEVEL% NEQ 0 GOTO END
-
-"..\..\..\ExternalBuildTools\ILRepack\ILRepack.exe" /t:exe /out:%1SqlFormatter.exe %1SqlFormatterTemp.exe %1fr\SqlFormatterExeAssembly.resources.dll
-IF %ERRORLEVEL% NEQ 0 GOTO END
-
-del %1LinqBridge.dll
-del %1NDesk.Options.dll
-del %1PoorMansTSqlFormatterLib.dll
-del %1PoorMansTSqlFormatterLib.pdb
-del %1SqlFormatterExeAssembly.exe
-del %1SqlFormatterExeAssembly.pdb
-del %1SqlFormatterTemp.exe
-del %1SqlFormatterTemp.pdb
-del %1es\*.* /Q
-del %1fr\*.* /Q
-:END
+mono "..\..\..\ExternalBuildTools\ILRepack\ILRepack.exe" /t:exe /out:SqlFormatter.exe SqlFormatterTemp.exe "fr/SqlFormatterExeAssembly.resources.dll" "en/SqlFormatterExeAssembly.resources.dll"
+popd

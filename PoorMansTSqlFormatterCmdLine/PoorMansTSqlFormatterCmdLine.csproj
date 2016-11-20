@@ -50,9 +50,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GeneralLanguageContent.resx</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Program.cs">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="References\NDesk.Options\Options.cs" />
+    <Compile Include="GeneralLanguageContent.es.Designer.cs">
+      <DependentUpon>GeneralLanguageContent.es.resx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralLanguageContent.fr.Designer.cs">
+      <DependentUpon>GeneralLanguageContent.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralLanguageContent.en.Designer.cs">
+      <DependentUpon>GeneralLanguageContent.en.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PoorMansTSqlFormatterLib\PoorMansTSqlFormatterLib.csproj">
@@ -65,20 +76,32 @@
     <None Include="References\NDesk.Options\NDesk.Options.dll" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GeneralLanguageContent.resx">
+      <LastGenOutput>GeneralLanguageContent.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="GeneralLanguageContent.es.resx">
       <SubType>Designer</SubType>
+      <LastGenOutput>GeneralLanguageContent.es.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneralLanguageContent.fr.resx">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GeneralLanguageContent.resx">
+      <LastGenOutput>GeneralLanguageContent.fr.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>GeneralLanguageContent.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralLanguageContent.en.resx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeneralLanguageContent.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
@@ -86,6 +109,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>Call $(ProjectDir)Postbuild_Merge.bat $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>$(ProjectDir)Postbuild_Merge.bat $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>

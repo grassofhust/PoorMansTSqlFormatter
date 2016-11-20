@@ -129,14 +129,8 @@ namespace PoorMansTSqlFormatterCmdLine
             }
 
             //nasty trick to figure out whether we're in a pipeline or not
-            bool throwAwayValue;
             string stdInput = null;
-            try
-            {
-                throwAwayValue = System.Console.KeyAvailable;
-            }
-            catch (InvalidOperationException)
-            {
+            if (!System.Console.KeyAvailable && (System.Console.WindowHeight + System.Console.WindowWidth) == 0) {
                 Console.InputEncoding = Encoding.UTF8;
                 stdInput = System.Console.In.ReadToEnd();
             }
@@ -204,7 +198,7 @@ namespace PoorMansTSqlFormatterCmdLine
                     else
                     {
                         Console.OutputEncoding = Encoding.UTF8;
-                        Console.Out.WriteLine(formattedOutput);
+                        Console.Out.WriteLine(formattedOutput.TrimEnd(Environment.NewLine.ToCharArray()));
                     }
                 }
 
